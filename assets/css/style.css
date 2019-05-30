@@ -13,3 +13,7 @@ h1 {
     font-size: 22px;
 }
 
+#start, #submit, #display {
+    background-color: aquamarine;
+    text-align: center;
+}
