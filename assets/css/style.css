@@ -2,7 +2,7 @@ body {
     background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZoscUObZwxyOnk3hVf0EyE2rknH1Ugd-VB3_E5EFUJMrLhP7l");
 }
 
-h1 {
+h1, p {
     background-color:lightblue;
     text-align: center;
 }

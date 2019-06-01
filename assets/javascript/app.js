@@ -2,22 +2,36 @@
 console.log("This works");
 
 //a variable holding the time allowed
-var timeAllowed = 180000;
+var time = 180000;
+// a variable for the interval
+var intervalId;
 
-// a variable for the setInterval of 1 second for the countdown
-var interval = setInterval(myTimer, 1000);
-
-// function to make the timer go
-function myTimer() {
-  console.log(interval)
-}
-
-// when the user clicks the START button, the timer starts counting down 3 minutes
-$("#start").on("click", function() {
-  $("#display").text(timeAllowed);
-  timeAllowed--;
-  console.log(timeAllowed);
+// we can use an anonymous function 
+// to run the code that we want to function
+// inside of the setInterval
+$("#start-timer").on("click", function(){
+  // the function() inside of setInterval
+  // is the anonymous function
+  intervalId = setInterval(function() {
+    // which we are saying
+    // run these steps 
+    // every 1000 ms
+    time--;
+    $("#timer").text(time);
+  }, 1000)
 });
+
+// we could also use a named function vs an anonymous function
+// uncomment this code below to see it in action
+// function setTime(){
+//    time--;
+//     $("#timer").text(time);
+// }
+
+// $("#start-timer").on("click", function(){
+//   intervalId = setInterval(setTime, 1000)
+// });
+
 
 
 // example from the stopwatch activity - to set up the conversion function
@@ -49,7 +63,7 @@ $("#start").on("click", function() {
 var answerKey = [2, 2, 2];
 
 // what I found for checking values in the radio buttons
-$("input:radio[name="..."]:checked").val()
+// $("input:radio[name="..."]:checked").val()
 
 // To check if the answers that the player has given are matching the correct answers, compare them to the answers key [in an array]
 var userChoice = [1, 2, 3];
@@ -85,7 +99,7 @@ if (userChoice[2] === answerKey[2]) {
 }
 
 // Display the result.
-alert("You answered correct" + correctAns + " questions");
+alert("You answered correct " + correctAns + " questions");
 alert("You gave incorrect answers to " + incorrectAns + " questions");
 alert("You left unanswered " + unansweredQs + " questions");
 
