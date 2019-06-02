@@ -2,7 +2,7 @@
 console.log("This works");
 
 //a variable holding the time allowed
-var time = 10;
+var time = 120;
 // a variable for the interval
 var intervalId;
 var converted;
@@ -22,7 +22,7 @@ $("#start-timer").on("click", function () {
 
     $("#timer").text(converted(time));
 
-    if (time == 0) {
+    if (time === 0) {
       stop();
       alert("Time is up, MISHKO! Let's see how bad you did!");
     }
@@ -32,10 +32,12 @@ $("#start-timer").on("click", function () {
 });
 
 // the timer stops when we run out of time
-//  function to stop interval
+// function to stop interval
+// and reset time to 2 minutes 
 function stop() {
   clearInterval(intervalId);
   clockRunning = false;
+  time = 120;
 }
 
 //  time converting function 
