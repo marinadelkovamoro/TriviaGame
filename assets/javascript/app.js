@@ -7,6 +7,7 @@ var time = 120;
 var intervalId;
 var converted;
 var clockRunning = false;
+
 // we can use an anonymous function 
 // to run the code that we want to function
 // inside of the setInterval
@@ -18,13 +19,14 @@ $("#start-timer").on("click", function () {
     // run these steps 
     // every 1000 ms
 
+
     time--;
 
     $("#timer").text(converted(time));
 
     if (time === 0) {
       stop();
-      alert("Time is up, MISHKO! Let's see how bad you did!");
+      alert("Time is up!");
     }
 
   }, 1000);
@@ -60,73 +62,55 @@ function converted(t) {
   return minutes + ":" + seconds;
 }
 
-// // when the user clicks button "Done!", the game/timer stops
-// // then the program checks the answers against the answerKey
-// // and returns the result 
 
-// // $("#submit-answers").on("click", function stop() {
-// //   clearInterval(intervalId);
-// //   clockRunning = false;
-// // }
+// set an array with correct answers
+var answerKey = [2, 2, 2];
 
+// counters for the correct answers, the incorrect answers, and the unsanswered Qs
+var correctAns = 0;
+var incorrectAns = 0;
+var unansweredQs = 0;
 
+// When the user clicks button "Done!", the timer stops
+$("#submit-answers").on("click", function () {
+  stop();
+// an array for user's answers that gets populated based on what radip button the user selected: 
+var userChoice = [$("input:radio[name=0]:checked").val(),
+                  $("input:radio[name=1]:checked").val(),
+                  $("input:radio[name=2]:checked").val()];
 
+  console.log(userChoice);
 
-//   // the timer stops 
+// then the program checks the user's answers against the answerKey
+// and counts how many correct answers, wrong answers, and unanswered questions has the player given
 
-//   // set my array with correct answers
-//   var answerKey = [2, 2, 2];
+if (userChoice[0] == answerKey[0]) {
+    correctAns++
+  } else if (userChoice[0] == undefined) {
+    unansweredQs++
+  } else {
+    incorrectAns++
+  }
 
-//   // what I found for checking values in the radio buttons
-//   // $("input:radio[name="..."]:checked").val()
+  if (userChoice[1] == answerKey[1]) {
+    correctAns++
+  } else if (userChoice[1] == undefined) {
+    unansweredQs++
+  } else {
+    incorrectAns++
+  }
 
-//   // To check if the answers that the player has given are matching the correct answers, compare them to the answers key [in an array]
-//   var userChoice = [1, 2, 3];
+  if (userChoice[2] == answerKey[2]) {
+    correctAns++
+  } else if (userChoice[2] == undefined) {
+    unansweredQs++
+  } else {
+    incorrectAns++
+  }
+ 
+  // Display the results
 
-//   // counter of the correct answers, counter for the incorrect answers, counter for unsanswered Qs
-//   var correctAns = 0;
-//   var incorrectAns = 0;
-//   var unansweredQs = 0;
-
-//   // Count how many correct answers, wrong answers, and unanswered questions has the player given.
-//   if (userChoice[0] === answerKey[0]) {
-//     correctAns++
-//   } else if (userChoice[0] === answerKey[0]) {
-//     incorrectAns++
-//   } else {
-//     unansweredQs++
-//   }
-
-//   if (userChoice[1] === answerKey[1]) {
-//     correctAns++
-//   } else if (userChoice[1] === answerKey[1]) {
-//     incorrectAns++
-//   } else {
-//     unansweredQs++
-//   }
-
-//   if (userChoice[2] === answerKey[2]) {
-//     correctAns++
-//   } else if (userChoice[2] === answerKey[2]) {
-//     incorrectAns++
-//   } else {
-//     unansweredQs++
-//   }
-
-//   // Display the result.
-//   alert("You answered correct " + correctAns + " questions");
-//   alert("You gave incorrect answers to " + incorrectAns + " questions");
-//   alert("You left unanswered " + unansweredQs + " questions");
-// });
-
-
-
-
-
-
-// The game ends when the time runs out. 
-
-
-
-
-
+  $("#results-printed").append("<p>" + "You answered correct " + correctAns + " questions");
+  $("#results-printed").append("<p>" + "You gave incorrect answers to " + incorrectAns + " questions");
+  $("#results-printed").append("<p>" + "You left unanswered " + unansweredQs + " questions");
+});
