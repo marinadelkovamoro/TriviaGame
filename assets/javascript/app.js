@@ -2,10 +2,11 @@
 console.log("This works");
 
 //a variable holding the time allowed
-var time = 120;
+var time = 10;
 // a variable for the interval
 var intervalId;
 var converted;
+var clockRunning = false;
 // we can use an anonymous function 
 // to run the code that we want to function
 // inside of the setInterval
@@ -16,17 +17,29 @@ $("#start-timer").on("click", function () {
     // which we are saying
     // run these steps 
     // every 1000 ms
-    
+
     time--;
 
     $("#timer").text(converted(time));
-    
+
+    if (time == 0) {
+      stop();
+      alert("Time is up, MISHKO! Let's see how bad you did!");
+    }
+
   }, 1000);
 
- });
+});
+
+// the timer stops when we run out of time
+//  function to stop interval
+function stop() {
+  clearInterval(intervalId);
+  clockRunning = false;
+}
 
 //  time converting function 
- function converted(t) {
+function converted(t) {
 
   var minutes = Math.floor(t / 60);
   var seconds = t - (minutes * 60);
@@ -45,66 +58,64 @@ $("#start-timer").on("click", function () {
   return minutes + ":" + seconds;
 }
 
+// // when the user clicks button "Done!", the game/timer stops
+// // then the program checks the answers against the answerKey
+// // and returns the result 
 
-// when the user clicks button "Done!", the game/timer stops
-// then the program checks the answers against the answerKey
-// and returns the result 
-var clockRunning = false;
-$("#submit-answers").on("click", stop);
-$("#submit-answers").on("click", function () {
-  function stop() {
+// // $("#submit-answers").on("click", function stop() {
+// //   clearInterval(intervalId);
+// //   clockRunning = false;
+// // }
 
-    // DONE: Use clearInterval to stop the count here and set the clock to not be running.
-    clearInterval(intervalId);
-    clockRunning = false;
-  }
 
-  // the timer stops 
 
-  // set my array with correct answers
-  var answerKey = [2, 2, 2];
 
-  // what I found for checking values in the radio buttons
-  // $("input:radio[name="..."]:checked").val()
+//   // the timer stops 
 
-  // To check if the answers that the player has given are matching the correct answers, compare them to the answers key [in an array]
-  var userChoice = [1, 2, 3];
+//   // set my array with correct answers
+//   var answerKey = [2, 2, 2];
 
-  // counter of the correct answers, counter for the incorrect answers, counter for unsanswered Qs
-  var correctAns = 0;
-  var incorrectAns = 0;
-  var unansweredQs = 0;
+//   // what I found for checking values in the radio buttons
+//   // $("input:radio[name="..."]:checked").val()
 
-  // Count how many correct answers, wrong answers, and unanswered questions has the player given.
-  if (userChoice[0] === answerKey[0]) {
-    correctAns++
-  } else if (userChoice[0] === answerKey[0]) {
-    incorrectAns++
-  } else {
-    unansweredQs++
-  }
+//   // To check if the answers that the player has given are matching the correct answers, compare them to the answers key [in an array]
+//   var userChoice = [1, 2, 3];
 
-  if (userChoice[1] === answerKey[1]) {
-    correctAns++
-  } else if (userChoice[1] === answerKey[1]) {
-    incorrectAns++
-  } else {
-    unansweredQs++
-  }
+//   // counter of the correct answers, counter for the incorrect answers, counter for unsanswered Qs
+//   var correctAns = 0;
+//   var incorrectAns = 0;
+//   var unansweredQs = 0;
 
-  if (userChoice[2] === answerKey[2]) {
-    correctAns++
-  } else if (userChoice[2] === answerKey[2]) {
-    incorrectAns++
-  } else {
-    unansweredQs++
-  }
+//   // Count how many correct answers, wrong answers, and unanswered questions has the player given.
+//   if (userChoice[0] === answerKey[0]) {
+//     correctAns++
+//   } else if (userChoice[0] === answerKey[0]) {
+//     incorrectAns++
+//   } else {
+//     unansweredQs++
+//   }
 
-  // Display the result.
-  alert("You answered correct " + correctAns + " questions");
-  alert("You gave incorrect answers to " + incorrectAns + " questions");
-  alert("You left unanswered " + unansweredQs + " questions");
-});
+//   if (userChoice[1] === answerKey[1]) {
+//     correctAns++
+//   } else if (userChoice[1] === answerKey[1]) {
+//     incorrectAns++
+//   } else {
+//     unansweredQs++
+//   }
+
+//   if (userChoice[2] === answerKey[2]) {
+//     correctAns++
+//   } else if (userChoice[2] === answerKey[2]) {
+//     incorrectAns++
+//   } else {
+//     unansweredQs++
+//   }
+
+//   // Display the result.
+//   alert("You answered correct " + correctAns + " questions");
+//   alert("You gave incorrect answers to " + incorrectAns + " questions");
+//   alert("You left unanswered " + unansweredQs + " questions");
+// });
 
 
 
