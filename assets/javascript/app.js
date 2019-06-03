@@ -75,7 +75,7 @@ function converted(t) {
 
 
 // set an array with correct answers
-var answerKey = [2, 2, 2];
+var answerKey = [2, 2, 2, 2];
 
 // counters for the correct answers, the incorrect answers, and the unsanswered Qs
 var correctAns = 0;
@@ -94,7 +94,7 @@ $("#submit-answers").on("click", function () {
   // an array for user's answers that gets populated based on what radip button the user selected: 
   var userChoice = [$("input:radio[name=0]:checked").val(),
   $("input:radio[name=1]:checked").val(),
-  $("input:radio[name=2]:checked").val()];
+  $("input:radio[name=2]:checked").val(), $("input:radio[name=3]:checked").val()];
 
   console.log(userChoice);
 
@@ -120,6 +120,14 @@ $("#submit-answers").on("click", function () {
   if (userChoice[2] == answerKey[2]) {
     correctAns++
   } else if (userChoice[2] == undefined) {
+    unansweredQs++
+  } else {
+    incorrectAns++
+  }
+  
+  if (userChoice[3] == answerKey[3]) {
+    correctAns++
+  } else if (userChoice[3] == undefined) {
     unansweredQs++
   } else {
     incorrectAns++

@@ -2,7 +2,7 @@ body {
     background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZoscUObZwxyOnk3hVf0EyE2rknH1Ugd-VB3_E5EFUJMrLhP7l");
 }
 
-h1, p {
+h1, #timer, #results-printed {
     background-color:lightblue;
     text-align: center;
 }
@@ -16,4 +16,9 @@ h1, p {
 #start, #submit, #display {
     background-color: aquamarine;
     text-align: center;
+}
+
+#font {
+    font-size: 26px;
+    font-weight: 550;
 }
