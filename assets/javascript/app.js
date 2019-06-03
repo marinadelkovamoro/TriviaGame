@@ -7,6 +7,13 @@ var time = 120;
 var intervalId;
 var converted;
 var clockRunning = false;
+// create a variable for tracking if the user has clicked start yet
+var userClickStart = false;
+
+
+$(document).ready(function () {
+  // $("#hideQuiz").hide();
+});
 
 // we can use an anonymous function 
 // to run the code that we want to function
@@ -14,11 +21,15 @@ var clockRunning = false;
 $("#start-timer").on("click", function () {
   // the function() inside of setInterval
   // is the anonymous function
+  $("#hideQuiz").show(400);
   intervalId = setInterval(function () {
     // which we are saying
     // run these steps 
     // every 1000 ms
 
+    // update the gamestarted variable
+    userClickStart = true;
+    console.log(userClickStart);
 
     time--;
 
@@ -73,18 +84,24 @@ var unansweredQs = 0;
 
 // When the user clicks button "Done!", the timer stops
 $("#submit-answers").on("click", function () {
+
+  // if the game is not started, then dont do anything
+  if (userClickStart !== true) {
+    return
+  }
+
   stop();
-// an array for user's answers that gets populated based on what radip button the user selected: 
-var userChoice = [$("input:radio[name=0]:checked").val(),
-                  $("input:radio[name=1]:checked").val(),
-                  $("input:radio[name=2]:checked").val()];
+  // an array for user's answers that gets populated based on what radip button the user selected: 
+  var userChoice = [$("input:radio[name=0]:checked").val(),
+  $("input:radio[name=1]:checked").val(),
+  $("input:radio[name=2]:checked").val()];
 
   console.log(userChoice);
 
-// then the program checks the user's answers against the answerKey
-// and counts how many correct answers, wrong answers, and unanswered questions has the player given
+  // then the program checks the user's answers against the answerKey
+  // and counts how many correct answers, wrong answers, and unanswered questions has the player given
 
-if (userChoice[0] == answerKey[0]) {
+  if (userChoice[0] == answerKey[0]) {
     correctAns++
   } else if (userChoice[0] == undefined) {
     unansweredQs++
@@ -107,7 +124,7 @@ if (userChoice[0] == answerKey[0]) {
   } else {
     incorrectAns++
   }
- 
+
   // Display the results
 
   $("#results-printed").append("<p>" + "You answered correct " + correctAns + " questions");
